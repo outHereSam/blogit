@@ -1,1 +1,11 @@
-<p>signup works!</p>
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <input type="email" formControlName="email" placeholder="Email" />
+  <input type="text" formControlName="username" placeholder="Username" />
+  <input type="password" formControlName="password" placeholder="Password" />
+  <input
+    type="password"
+    formControlName="confirmPassword"
+    placeholder="Confirm Password"
+  />
+  <button type="submit">Create Account</button>
+</form>
