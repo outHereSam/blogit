@@ -21,6 +21,5 @@ export class AppComponent {
 
   ngOnInit() {
     this.posts$ = this.blogpostService.getBlogPosts();
-    this.posts$.subscribe((posts) => console.log(posts));
   }
 }
