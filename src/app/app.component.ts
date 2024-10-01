@@ -3,6 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { AnalyticsService } from './services/analytics.service';
 import { setAnalyticsCollectionEnabled } from '@firebase/analytics';
 import { Analytics } from '@angular/fire/analytics';
+import { BlogPostService } from './services/blog-post.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +15,12 @@ import { Analytics } from '@angular/fire/analytics';
 })
 export class AppComponent {
   title = 'blogit';
+  posts$!: Observable<unknown[]>;
 
-  // constructor(private analytics: Analytics) {
-  //   if (isDevMode()) {
-  //     setAnalyticsCollectionEnabled(this.analytics, false);
+  constructor(private blogpostService: BlogPostService) {}
 
-  //     (window as any)['FIREBASE_ANALYTICS_DEBUG'] = true;
-  //   }
-  // }
+  ngOnInit() {
+    this.posts$ = this.blogpostService.getBlogPosts();
+    this.posts$.subscribe((posts) => console.log(posts));
+  }
 }
