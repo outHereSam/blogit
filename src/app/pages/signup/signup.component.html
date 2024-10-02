@@ -3,18 +3,58 @@
   <div class="card">
     <h1>Sign Up</h1>
     <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <input type="email" formControlName="email" placeholder="Email" />
-      <input type="text" formControlName="username" placeholder="Username" />
-      <input
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-      />
-      <input
-        type="password"
-        formControlName="confirmPassword"
-        placeholder="Confirm Password"
-      />
+      <div class="input-group">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+          [style]="{border: signupForm.get('email')?.touched && signupForm.get('email')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if(signupForm.get('email')?.invalid &&
+        signupForm.get('email')?.touched){
+        @if(signupForm.get('email')?.errors?.['required']){
+        <small class="text-warning">Email is required</small>
+        } @if(signupForm.get('email')?.errors?.['email']){
+        <small class="text-warning">Invalid email format</small>
+        } }
+      </div>
+      <div class="input-group">
+        <input
+          type="text"
+          formControlName="username"
+          placeholder="Username"
+          [style]="{border: signupForm.get('username')?.touched && signupForm.get('username')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if (signupForm.get('username')?.touched &&
+        signupForm.get('username')?.errors?.['required']) {
+        <small>Username is required</small>
+        }
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          [style]="{border: signupForm.get('password')?.touched && signupForm.get('password')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if (signupForm.get('password')?.touched &&
+        signupForm.get('password')?.errors?.['required']) {
+        <small>Can't be empty</small>
+        }
+      </div>
+      <div class="input-group">
+        <input
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="Confirm Password"
+          [style]="{border: signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if (signupForm.get('confirmPassword')?.touched &&
+        signupForm.get('confirmPassword')?.errors?.['required']) {
+        <small>Can't be empty</small>
+        }
+      </div>
+
       <button type="submit">Create Account</button>
 
       <p>Already have an account? <a [routerLink]="['/login']">Log In</a></p>

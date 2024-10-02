@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormGroup,
   FormControl,
@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { NOTYF } from '../../../utils/notyf.token';
+import { Notyf } from 'notyf';
 
 @Component({
   selector: 'app-signup',
@@ -17,6 +19,9 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './signup.component.sass',
 })
 export class SignupComponent {
+  successMessage!: string;
+  error!: string;
+
   signupForm = new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -34,7 +39,11 @@ export class SignupComponent {
     { validators: this.checkPasswordsMatch }
   );
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    @Inject(NOTYF) private notyf: Notyf
+  ) {}
 
   checkPasswordsMatch(control: AbstractControl) {
     const password = control.get('password')?.value;
@@ -49,9 +58,15 @@ export class SignupComponent {
         this.authService
           .signup(email, username, password)
           .then(() => {
-            this.router.navigate(['login']);
+            this.successMessage = 'Account Created Successfully';
+            this.notyf.success(this.successMessage);
+            this.router.navigate(['/login']);
           })
-          .catch((err) => console.error('Signup failed', err.message));
+          .catch((err) => {
+            this.error = 'Failed to create account';
+            this.notyf.error(this.error);
+            console.error('Signup failed', err.message);
+          });
       }
     } else {
       console.log(this.signupForm.errors);
