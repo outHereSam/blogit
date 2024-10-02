@@ -1,17 +1,22 @@
 import { CanActivateFn, Router } from '@angular/router';
-import { getAuth } from '@angular/fire/auth';
+import { getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
+  const authService = inject(AuthService);
 
   const auth = getAuth();
-  const user = auth.currentUser;
 
-  if (user) {
-    return true;
-  } else {
-    router.navigate(['/login']);
-    return false;
-  }
+  return new Promise<boolean>((resolve) => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        resolve(true);
+      } else {
+        router.navigate(['/login']);
+        resolve(false);
+      }
+    });
+  });
 };

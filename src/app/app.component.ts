@@ -1,10 +1,11 @@
 import { Component, inject, isDevMode } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { AnalyticsService } from './services/analytics.service';
 import { setAnalyticsCollectionEnabled } from '@firebase/analytics';
 import { Analytics } from '@angular/fire/analytics';
 import { BlogPostService } from './services/blog-post.service';
 import { Observable } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-root',
@@ -14,12 +15,18 @@ import { Observable } from 'rxjs';
   styleUrl: './app.component.sass',
 })
 export class AppComponent {
-  title = 'blogit';
   posts$!: Observable<unknown[]>;
 
-  constructor(private blogpostService: BlogPostService) {}
+  constructor(private auth: Auth, private router: Router) {}
 
   ngOnInit() {
-    this.posts$ = this.blogpostService.getBlogPosts();
+    this.auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        this.router.navigate(['']);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
   }
 }
