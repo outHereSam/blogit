@@ -17,6 +17,8 @@ import {
   UserTrackingService,
 } from '@angular/fire/analytics';
 import { environment } from '../environments/environment.development';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { NOTYF, notyfFactory } from '../utils/notyf.token';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -32,5 +34,10 @@ export const appConfig: ApplicationConfig = {
     provideAnalytics(() => getAnalytics()),
     ScreenTrackingService,
     UserTrackingService,
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    provideAnimationsAsync(),
+    { provide: NOTYF, useFactory: notyfFactory },
   ],
 };
