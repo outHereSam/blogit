@@ -55,7 +55,13 @@
         }
       </div>
 
+      @if (isLoading) {
+      <button>
+        <app-loader />
+      </button>
+      } @else {
       <button type="submit">Create Account</button>
+      }
 
       <p>Already have an account? <a [routerLink]="['/login']">Log In</a></p>
     </form>

@@ -30,7 +30,14 @@
         <small>Can't be empty</small>
         }
       </div>
+
+      @if (isLoading) {
+      <button>
+        <app-loader />
+      </button>
+      } @else {
       <button type="submit">Login</button>
+      }
 
       <p>
         Don't have an account yet? <a [routerLink]="['/signup']">Sign Up</a>
