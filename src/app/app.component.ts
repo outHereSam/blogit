@@ -15,18 +15,7 @@ import { Auth } from '@angular/fire/auth';
   styleUrl: './app.component.sass',
 })
 export class AppComponent {
-  posts$!: Observable<unknown[]>;
+  constructor() {}
 
-  constructor(private auth: Auth, private router: Router) {}
-
-  ngOnInit() {
-    this.auth.onAuthStateChanged((user) => {
-      if (user) {
-        // User is signed in
-        this.router.navigate(['']);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    });
-  }
+  ngOnInit() {}
 }
