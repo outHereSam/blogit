@@ -3,12 +3,31 @@
   <div class="card">
     <h1>Login</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <input type="email" formControlName="email" placeholder="Email" />
-      <input
-        type="password"
-        formControlName="password"
-        placeholder="Password"
-      />
+      <div class="input-group">
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+          [style]="{border: loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if (loginForm.get('email')?.touched &&
+        loginForm.get('email')?.errors?.['required']) {
+        <small>Can't be empty</small>
+        }
+      </div>
+
+      <div class="input-group">
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Password"
+          [style]="{border: loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required'] ? '1px solid red' : ''}"
+        />
+        @if (loginForm.get('password')?.touched &&
+        loginForm.get('password')?.errors?.['required']) {
+        <small>Can't be empty</small>
+        }
+      </div>
       <button type="submit">Login</button>
 
       <p>

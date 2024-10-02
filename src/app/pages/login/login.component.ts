@@ -50,7 +50,7 @@ export class LoginComponent {
           });
       }
     } else {
-      console.log(this.loginForm.errors);
+      this.loginForm.markAllAsTouched();
     }
   }
 }
