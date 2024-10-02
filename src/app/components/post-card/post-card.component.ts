@@ -1,12 +1,25 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Post } from '../../models/app.model';
+import { DocumentData } from '@angular/fire/firestore';
+import { UserService } from '../../services/user.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-post-card',
   standalone: true,
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './post-card.component.html',
-  styleUrl: './post-card.component.sass'
+  styleUrl: './post-card.component.sass',
 })
 export class PostCardComponent {
+  @Input() post!: DocumentData;
+  author!: DocumentData;
 
+  constructor(private userService: UserService) {}
+
+  ngOnInit() {
+    this.userService
+      .getUser(this.post['authorId'])
+      .then((user) => (this.author = user));
+  }
 }

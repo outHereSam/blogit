@@ -1,1 +1,7 @@
-<p>post-list works!</p>
+<main>
+  @if (posts$ | async; as posts) { @for (post of posts; track post['id']) {
+  <a [routerLink]="['/post-detail', post['id']]">
+    <app-post-card [post]="post"></app-post-card>
+  </a>
+  } }
+</main>

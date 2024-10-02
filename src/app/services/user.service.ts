@@ -32,12 +32,9 @@ export class UserService {
     this.user$ = user(this.auth);
   }
 
-  getUser() {
+  getUser(uid: string | undefined) {
     const usersCollection = collection(this.firestore, 'users');
-    const q = query(
-      usersCollection,
-      where('uid', '==', this.auth.currentUser?.uid)
-    );
+    const q = query(usersCollection, where('uid', '==', uid));
 
     return getDocs(q)
       .then((snapshot) => {

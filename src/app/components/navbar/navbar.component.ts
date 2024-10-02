@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/app.model';
 import { DocumentData } from '@angular/fire/firestore';
 import { JsonPipe } from '@angular/common';
+import { Auth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-navbar',
@@ -14,9 +15,14 @@ import { JsonPipe } from '@angular/common';
 })
 export class NavbarComponent {
   user!: DocumentData;
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private auth: Auth,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.userService.getUser().then((user) => (this.user = user));
+    const user = this.auth.currentUser;
+    this.userService.getUser(user?.uid).then((user) => (this.user = user));
   }
 }

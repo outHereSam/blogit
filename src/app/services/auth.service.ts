@@ -32,15 +32,22 @@ export class AuthService {
     this.user$ = user(this.auth);
   }
 
+  generateAvatarUrl(uid: string) {
+    const avatarStyle = 'avataaars-neutral';
+    return `https://api.dicebear.com/9.x/${avatarStyle}/svg?seed=${uid}`;
+  }
+
   signup(email: string, username: string, password: string) {
     return createUserWithEmailAndPassword(this.auth, email, password).then(
       (userCredentials) => {
         const uid = userCredentials.user.uid;
+        const avatarUrl = this.generateAvatarUrl(uid);
         const usersCollection = collection(this.firestore, 'users');
         return addDoc(usersCollection, {
           uid,
           username,
           email,
+          avatarUrl,
         });
       }
     );

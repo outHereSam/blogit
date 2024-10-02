@@ -66,10 +66,14 @@
     </button>
   </nav>
 
+  @if (user) {
   <div class="profile">
     <div class="avatar"></div>
     <div class="info">
       <p class="username">&#64;{{ user["username"] }}</p>
     </div>
   </div>
+  } @else {
+  <button routerLink="/login">Login</button>
+  }
 </header>
