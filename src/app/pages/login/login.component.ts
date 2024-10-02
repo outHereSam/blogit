@@ -16,6 +16,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.component.sass',
 })
 export class LoginComponent {
+  error: string | null = null;
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required]),
@@ -32,7 +33,10 @@ export class LoginComponent {
           .then(() => {
             this.router.navigate(['/']);
           })
-          .catch((err) => console.error('Login failed', err.message));
+          .catch((err) => {
+            this.error = 'Login failed. Invalid credentials';
+            console.error('Login failed', err.message);
+          });
       }
     } else {
       console.log(this.loginForm.errors);

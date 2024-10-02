@@ -1,0 +1,47 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+header
+    @include flex('row', 0)
+    justify-content: space-between
+    margin: 24px 0 0 0
+
+    nav
+        @include flex('row', 8px)
+        background-color: $white
+        padding: 10px
+        border-radius: 999px
+        box-shadow: 0 2px 24px rgba(0,0,0,0.05)
+
+        button
+            cursor: pointer
+            width: 40px
+            height: 40px
+            border-radius: 50%
+            border: none
+            background: none
+
+            &:hover
+                background-color: $grey-highlight
+                
+        .active
+            background-color: $grey-highlight
+
+    .profile
+        @include flex('row', 10px)
+
+        .avatar
+            width: 40px
+            height: 40px
+            border-radius: 50%
+            background-color: $grey-highlight
+
+        .name
+            text-align: left
+            font-size: fontSize('s')
+            font-weight: 500
+            
+        .username
+            font-size: fontSize('s')
+            color: $text-secondary

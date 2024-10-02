@@ -6,3 +6,9 @@
       @content
   @else
     @error "Breakpoint '#{$breakpoint}' is not defined."  
+
+@mixin flex($direction, $gap)
+  display: flex
+  flex-direction: $direction
+  gap: $gap
+  align-items: center

@@ -2,6 +2,11 @@
   <img src="../../../assets/logo.svg" alt="Logo" />
   <div class="card">
     <h1>Login</h1>
+    @if (error) {
+    <div class="error">
+      <p>{{ error }}</p>
+    </div>
+    }
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <input type="email" formControlName="email" placeholder="Email" />
       <input
