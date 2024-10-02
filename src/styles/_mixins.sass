@@ -1,0 +1,8 @@
+@use 'variables' as *
+
+@mixin breakpoint($breakpoint)
+  @if map-has-key($map-for-breakpoints, $breakpoint)
+    @media (min-width: map-get($map-for-breakpoints, $breakpoint))
+      @content
+  @else
+    @error "Breakpoint '#{$breakpoint}' is not defined."  

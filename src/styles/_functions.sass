@@ -1,0 +1,4 @@
+$font-sizes: ('xs': 14px, 's': 16px, 'm': 24px, 'l': 32px)
+
+@function fontSize($size)
+    @return map-get($font-sizes, $size)

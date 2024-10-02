@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+@use './styles/base' as *
+@use './styles/functions' as *
+@use './styles/mixins' as *
+@use './styles/variables' as *
+
+body, button, input
+    font-family: $font-stack
+
+body
+    background-color: $white-bg
+    color: $text-main
+
+.container
+    max-width: 736px
+    margin: 0 auto

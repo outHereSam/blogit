@@ -7,9 +7,16 @@ import {
   signOut,
   user,
 } from '@angular/fire/auth';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import {
+  addDoc,
+  collection,
+  collectionData,
+  doc,
+  Firestore,
+  getDoc,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { from, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

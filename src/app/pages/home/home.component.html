@@ -1,12 +1,9 @@
-<h1>Welcome To Blogit</h1>
+<div class="container">
+  <app-navbar />
 
-@if (authService.user$ | async; as user) {
-<div>
-  <pre>
-        {{ user | json }}
-    </pre
-  >
+  <main>
+    <app-post-list />
+  </main>
+
+  <button (click)="onLogout()">Logout</button>
 </div>
-}
-
-<button (click)="onLogout()">Logout</button>

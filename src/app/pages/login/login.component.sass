@@ -1,0 +1,56 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+main
+    margin: 120px 0 0 0 
+
+    img
+        margin: 0 auto 80px
+.card
+    background-color: $white
+    max-width: 526px
+    border: solid 1px $line-color
+    border-radius: 8px
+    padding: 30px
+    margin: 0 auto
+
+    h1
+        font-size: fontSize('m')
+        margin: 0 0 30px 0
+        text-align: center
+
+    form
+        width: 100%
+
+        input, button
+            width: 100%
+            border-radius: 999px
+            padding: 12px 22px
+
+        input
+            background-color: $white-light
+            border: solid 1px $line-color
+            margin: 0 0 16px 0
+
+            &:focus
+                outline: solid 1px $blue-accent
+
+        button
+            background-color: $blue-accent
+            color: $white
+            border: none
+            cursor: pointer
+            transition: background-color 0.2s ease-in-out
+
+            &:hover
+                background-color: lighten($blue-accent, 10%)
+
+        p
+            text-align: center
+            margin: 20px 0 0 0
+
+            a
+                text-decoration: none
+                color: $blue-accent
+            

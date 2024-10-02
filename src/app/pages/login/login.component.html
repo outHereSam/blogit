@@ -1,5 +1,19 @@
-<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-  <input type="email" formControlName="email" placeholder="Email" />
-  <input type="password" formControlName="password" placeholder="Password" />
-  <button type="submit">Login</button>
-</form>
+<main>
+  <img src="../../../assets/logo.svg" alt="Logo" />
+  <div class="card">
+    <h1>Login</h1>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="email" formControlName="email" placeholder="Email" />
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+
+      <p>
+        Don't have an account yet? <a [routerLink]="['/signup']">Sign Up</a>
+      </p>
+    </form>
+  </div>
+</main>
