@@ -1,0 +1,51 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+main
+    margin: 70px 0 0 0
+
+    .title
+        font-size: fontSize('m')
+        margin-bottom: 10px
+
+    .date
+        font-size: fontSize('s')
+        color: $text-secondary
+        background-color: $grey-highlight
+        padding: 5px 12px
+        border-radius: 999px
+
+    .author
+        font-size: fontSize('s')
+        color: $text-secondary
+        margin: 10px 0 0 0
+
+    .content
+        margin: 40px 0 30px 
+        font-size: fontSize('s')
+        line-height: 1.5
+        color: $content-color
+
+    .react
+        @include flex('row', 12px)
+
+        button
+            background: none
+            border: solid 1px $line-color
+            padding: 5px 12px
+            border-radius: 999px
+            @include flex('row', 10px)
+            cursor: pointer
+
+            &:hover
+                background-color: $grey-highlight
+
+            span
+                font-size: fontSize('xs')
+                font-weight: 300
+                color: $text-secondary
+
+    .comments
+        margin: 40px 0
+    

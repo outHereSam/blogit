@@ -3,5 +3,7 @@
     <app-post-list />
   </main>
 
-  <button (click)="onLogout()">Logout</button>
+  @if (userExists) {
+  <!-- <button (click)="onLogout()">Logout</button> -->
+  }
 </div>

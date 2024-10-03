@@ -4,6 +4,7 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { PostListComponent } from '../../components/post-list/post-list.component';
 import { Observable } from 'rxjs';
+import { Auth, user, User } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-home',
@@ -13,9 +14,21 @@ import { Observable } from 'rxjs';
   styleUrl: './home.component.sass',
 })
 export class HomeComponent {
-  constructor(public authService: AuthService) {}
+  user$: Observable<User | null>;
+  userExists: boolean = false;
+  constructor(public authService: AuthService, private auth: Auth) {
+    this.user$ = user(this.auth);
+  }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.user$.subscribe((user) => {
+      if (user) {
+        this.userExists = true;
+      } else {
+        this.userExists = false;
+      }
+    });
+  }
 
   onLogout() {
     this.authService.logout();
