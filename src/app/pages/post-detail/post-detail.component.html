@@ -51,7 +51,7 @@
     <h3 class="sub-heading">Comments</h3>
 
     @if (user$ | async) {
-    <app-comment-form />
+    <app-comment-form [postId]="postId" />
     } @else {
     <div class="login">
       <h3>Login to comment</h3>

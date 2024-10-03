@@ -1,6 +1,13 @@
 <div class="comment-form">
   <form>
-    <textarea name="comment" placeholder="Write a comment"></textarea>
-    <button type="submit">Comment</button>
+    <textarea [formControl]="comment" placeholder="Write a comment"></textarea>
+    <button
+      type="button"
+      (click)="sendComment()"
+      [disabled]="comment.invalid"
+      [class]="comment.valid ? '' : 'disabled'"
+    >
+      Comment
+    </button>
   </form>
 </div>
