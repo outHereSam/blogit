@@ -12,8 +12,8 @@ export interface Comment {
   id: string;
   comment: string;
   createdAt: Date;
-  likes: number;
-  dislikes: number;
+  likes?: number;
+  dislikes?: number;
   authorId: string;
   postId: string;
 }

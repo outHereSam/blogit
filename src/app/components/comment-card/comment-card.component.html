@@ -1,0 +1,13 @@
+<div class="comment-card">
+  <div class="user-profile">
+    <div class="avatar">
+      <img src="{{ user['avatarUrl'] }}" alt="User Avatar" />
+    </div>
+    <h4 class="username">&#64;{{ user["username"] }}</h4>
+    <p class="date">{{ comment["createdAt"].toDate() | date : "MMM dd" }}</p>
+  </div>
+
+  <p class="comment">
+    {{ comment["comment"] }}
+  </p>
+</div>
