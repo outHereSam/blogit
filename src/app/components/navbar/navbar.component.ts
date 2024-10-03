@@ -28,11 +28,6 @@ export class NavbarComponent {
   }
 
   ngOnInit() {
-    // const authUser = this.auth.currentUser;
-    // this.userService.getUser(authUser?.uid).then((user) => (this.user = user));
-    // this.userService
-    //   .getUser(authUser?.uid)
-    //   .then((user) => (this.author = user));
     this.user$.subscribe({
       next: (user) => {
         if (user) {

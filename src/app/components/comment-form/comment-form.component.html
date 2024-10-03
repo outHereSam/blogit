@@ -1,6 +1,7 @@
 <div class="comment-form">
   <form>
     <textarea [formControl]="comment" placeholder="Write a comment"></textarea>
+    @if (isLoggedIn) {
     <button
       type="button"
       (click)="sendComment()"
@@ -9,5 +10,8 @@
     >
       Comment
     </button>
+    } @if (!isLoggedIn) {
+    <a [routerLink]="['/login']">Login to comment</a>
+    }
   </form>
 </div>

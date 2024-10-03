@@ -19,8 +19,13 @@
             outline: none
             padding: 12px
             font-size: fontSize('s')
+            margin: 0 0 10px 0
 
-        button
+            &:disabled
+                cursor: not-allowed
+                
+
+        button, a
             font-size: fontSize('s')
             padding: 8px 12px
             border: none
@@ -31,6 +36,9 @@
 
             &:hover
                 background-color: darken($blue-accent, 10%)
+
+        a
+            text-decoration: none
 
         .disabled
             opacity: 0.5

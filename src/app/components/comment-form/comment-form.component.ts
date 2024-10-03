@@ -4,17 +4,20 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { CommentService } from '../../services/comment.service';
 import { Auth, user, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-comment-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './comment-form.component.html',
   styleUrl: './comment-form.component.sass',
 })
 export class CommentFormComponent {
   user$!: Observable<User | null>;
+  isLoggedIn: boolean = false;
   userId!: string | undefined;
+
   comment = new FormControl('', [Validators.required]);
   @Input() postId!: string | null;
 
@@ -24,7 +27,16 @@ export class CommentFormComponent {
 
   ngOnInit() {
     this.user$.subscribe({
-      next: (user) => (this.userId = user?.uid),
+      next: (user) => {
+        if (user) {
+          this.isLoggedIn = true;
+          this.comment.enable();
+        } else {
+          this.isLoggedIn = false;
+          this.comment.disable();
+        }
+        this.userId = user?.uid;
+      },
       error: (err) => console.error(err),
     });
   }
