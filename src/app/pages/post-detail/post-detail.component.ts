@@ -8,11 +8,18 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
 import { CommentFormComponent } from '../../components/comment-form/comment-form.component';
 import { CommentListComponent } from '../../components/comment-list/comment-list.component';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-post-detail',
   standalone: true,
-  imports: [AsyncPipe, DatePipe, CommentFormComponent, CommentListComponent],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    CommentFormComponent,
+    CommentListComponent,
+    NavbarComponent,
+  ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',
 })
