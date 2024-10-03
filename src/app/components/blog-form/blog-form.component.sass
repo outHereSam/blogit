@@ -1,0 +1,45 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+.container
+    margin: 40px 0 0 0
+
+    .title
+        margin: 0 0 20px 0
+        font-size: fontSize('s')
+
+    form
+
+        input, textarea
+            width: 100%
+            background-color: $white-light
+            border: solid 1px $line-color
+            border-radius: 4px
+            outline: none
+            padding: 12px
+            font-size: fontSize('s')
+            margin: 0 0 10px 0
+
+        button, a
+            font-size: fontSize('s')
+            padding: 8px 12px
+            border: none
+            background-color: $blue-accent
+            color: $white
+            border-radius: 4px
+            cursor: pointer
+
+            &:hover
+                background-color: darken($blue-accent, 10%)
+
+        a
+            text-decoration: none
+
+        .disabled
+            opacity: 0.5
+            cursor: not-allowed
+
+            &:hover
+                background-color: $blue-accent
+            

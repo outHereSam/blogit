@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   generateAvatarUrl(uid: string) {
-    const avatarStyle = 'avataaars-neutral';
+    const avatarStyle = 'thumbs';
     return `https://api.dicebear.com/9.x/${avatarStyle}/svg?seed=${uid}`;
   }
 

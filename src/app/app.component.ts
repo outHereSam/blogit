@@ -5,8 +5,9 @@ import { setAnalyticsCollectionEnabled } from '@firebase/analytics';
 import { Analytics } from '@angular/fire/analytics';
 import { BlogPostService } from './services/blog-post.service';
 import { Observable } from 'rxjs';
-import { Auth } from '@angular/fire/auth';
+import { Auth, user, User } from '@angular/fire/auth';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { DocumentData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,18 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   styleUrl: './app.component.sass',
 })
 export class AppComponent {
-  constructor() {}
+  user$: Observable<User | null>;
+  user!: User | null;
 
-  ngOnInit() {}
+  constructor(private auth: Auth) {
+    this.user$ = user(this.auth);
+  }
+
+  ngOnInit() {
+    this.user$.subscribe({
+      next: (user) => {
+        this.user = user;
+      },
+    });
+  }
 }

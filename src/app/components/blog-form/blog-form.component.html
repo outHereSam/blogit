@@ -1,9 +1,18 @@
 <div class="container">
   <h3 class="title">Create Post</h3>
 
-  <form>
-    <input type="text" name="title" placeholder="Title" />
-    <textarea name="content" placeholder="Write a post..."></textarea>
-    <button type="submit">Post</button>
+  <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+    <input type="text" formControlName="title" placeholder="Title" />
+    <textarea
+      formControlName="content"
+      placeholder="Write a post..."
+    ></textarea>
+    <button
+      [class]="postForm.valid ? '' : 'disabled'"
+      type="submit"
+      [disabled]="postForm.invalid"
+    >
+      Post
+    </button>
   </form>
 </div>
