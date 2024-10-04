@@ -1,7 +1,7 @@
 <app-navbar />
 @if (canUpdatePost) {
 <div class="options">
-  <button class="edit">Edit Post</button>
+  <button class="edit" [routerLink]="['/edit', postId]">Edit Post</button>
   <button class="delete" (click)="openDialog()">Delete Post</button>
 </div>
 }

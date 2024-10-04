@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
 import { Observable, switchMap } from 'rxjs';
 import { BlogPostService } from '../../services/blog-post.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { AsyncPipe, DatePipe } from '@angular/common';
 import { Auth, user, User } from '@angular/fire/auth';
 import { UserService } from '../../services/user.service';
@@ -10,7 +10,7 @@ import { CommentFormComponent } from '../../components/comment-form/comment-form
 import { CommentListComponent } from '../../components/comment-list/comment-list.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
-import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationModalComponent } from '../../components/confirmation-modal/confirmation-modal.component';
 
@@ -23,11 +23,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
     AsyncPipe,
     DatePipe,
     CommentFormComponent,
-
     CommentListComponent,
     ConfirmationModalComponent,
     NavbarComponent,
     MatButtonModule,
+    RouterLink,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',

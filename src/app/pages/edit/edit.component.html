@@ -1,0 +1,5 @@
+<app-navbar />
+
+@if (post$ | async; as post) {
+<app-blog-form [post]="post" />
+}

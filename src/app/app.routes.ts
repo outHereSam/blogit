@@ -31,6 +31,11 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'edit/:postId',
+    loadComponent: () =>
+      import('./pages/edit/edit.component').then((m) => m.EditComponent),
+  },
+  {
     path: '**',
     redirectTo: '',
     pathMatch: 'full',

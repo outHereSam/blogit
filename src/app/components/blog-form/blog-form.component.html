@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="title">Create Post</h3>
+  <h3 class="title">{{ post ? "Edit Post" : "Create Post" }}</h3>
 
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <input type="text" formControlName="title" placeholder="Title" />

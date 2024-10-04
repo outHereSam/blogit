@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,6 +12,7 @@ import { NOTYF } from '../../../utils/notyf.token';
 import { Notyf } from 'notyf';
 import { Router } from '@angular/router';
 import { EditorModule } from 'primeng/editor';
+import { DocumentData } from '@angular/fire/firestore';
 @Component({
   selector: 'app-blog-form',
   standalone: true,
@@ -20,11 +21,16 @@ import { EditorModule } from 'primeng/editor';
   styleUrl: './blog-form.component.sass',
 })
 export class BlogFormComponent {
+  @Input() post!: DocumentData;
   user$!: Observable<User | null>;
   userId: string | undefined;
   postForm = new FormGroup({
-    title: new FormControl('', [Validators.required]),
-    content: new FormControl('', [Validators.required]),
+    title: new FormControl(this.post ? this.post['title'] : '', [
+      Validators.required,
+    ]),
+    content: new FormControl(this.post ? this.post['content'] : '', [
+      Validators.required,
+    ]),
   });
   constructor(
     private blogPostService: BlogPostService,
@@ -36,6 +42,14 @@ export class BlogFormComponent {
   }
 
   ngOnInit() {
+    this.postForm = new FormGroup({
+      title: new FormControl(this.post ? this.post['title'] : '', [
+        Validators.required,
+      ]),
+      content: new FormControl(this.post ? this.post['content'] : '', [
+        Validators.required,
+      ]),
+    });
     this.user$.subscribe((user) => {
       if (user) {
         this.userId = user?.uid;
