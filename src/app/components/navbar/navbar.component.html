@@ -71,14 +71,15 @@
   </nav>
 
   @if (user) {
-  <div [cdkMenuTriggerFor]="menu" class="profile">
+  <!-- <div [cdkMenuTriggerFor]="menu" class="profile">
     <div class="avatar">
       <img [src]="author['avatarUrl']" alt="Avatar" />
     </div>
     <div class="info">
       <p class="username">&#64;{{ user["username"] }}</p>
     </div>
-  </div>
+  </div> -->
+  <app-profile [cdkMenuTriggerFor]="menu" [authorId]="user['uid']" />
 
   <ng-template #menu>
     <div class="options" cdkMenu>

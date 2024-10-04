@@ -8,6 +8,8 @@ import {
   DocumentData,
   Firestore,
   getDoc,
+  orderBy,
+  query,
 } from '@angular/fire/firestore';
 import { from, map, Observable } from 'rxjs';
 import { Post } from '../models/app.model';
@@ -20,7 +22,8 @@ export class BlogPostService {
 
   getBlogPosts(): Observable<DocumentData[]> {
     const postsCollection = collection(this.firestore, 'posts');
-    return collectionData(postsCollection, { idField: 'id' });
+    const queryPosts = query(postsCollection, orderBy('dateCreated', 'desc'));
+    return collectionData(queryPosts, { idField: 'id' });
   }
 
   getPostById(id: string): Observable<DocumentData | undefined> {

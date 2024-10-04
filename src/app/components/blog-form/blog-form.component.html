@@ -3,11 +3,16 @@
 
   <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
     <input type="text" formControlName="title" placeholder="Title" />
-    <textarea
+    <!-- <textarea
       rows="20"
       formControlName="content"
       placeholder="Write a post..."
-    ></textarea>
+    ></textarea> -->
+    <p-editor
+      formControlName="content"
+      [style]="{ height: '320px' }"
+      placeholder="Write a post..."
+    />
     <button
       [class]="postForm.valid ? '' : 'disabled'"
       type="submit"

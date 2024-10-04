@@ -11,11 +11,11 @@ import { Observable } from 'rxjs';
 import { NOTYF } from '../../../utils/notyf.token';
 import { Notyf } from 'notyf';
 import { Router } from '@angular/router';
-
+import { EditorModule } from 'primeng/editor';
 @Component({
   selector: 'app-blog-form',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, EditorModule],
   templateUrl: './blog-form.component.html',
   styleUrl: './blog-form.component.sass',
 })
@@ -26,7 +26,6 @@ export class BlogFormComponent {
     title: new FormControl('', [Validators.required]),
     content: new FormControl('', [Validators.required]),
   });
-
   constructor(
     private blogPostService: BlogPostService,
     private auth: Auth,

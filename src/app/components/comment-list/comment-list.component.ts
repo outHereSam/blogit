@@ -20,9 +20,5 @@ export class CommentListComponent {
 
   ngOnInit() {
     this.comments$ = this.commentService.getCommentsByPostId(this.postId);
-    this.comments$.subscribe({
-      next: (comments) => console.log(comments),
-      error: (err) => console.error(err),
-    });
   }
 }

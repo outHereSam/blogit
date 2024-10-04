@@ -2,7 +2,7 @@
 @if (canUpdatePost) {
 <div class="options">
   <button class="edit">Edit Post</button>
-  <button class="delete" mat-button (click)="openDialog()">Delete Post</button>
+  <button class="delete" (click)="openDialog()">Delete Post</button>
 </div>
 }
 <main>
@@ -13,7 +13,7 @@
   }}</span>
   <p class="author">by {{ author["username"] }}</p>
 
-  <p class="content">{{ post["content"] }}</p>
+  <p class="content" [innerHTML]="sanitizedContent"></p>
 
   <div class="react">
     <button class="likes">

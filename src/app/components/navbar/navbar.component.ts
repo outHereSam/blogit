@@ -8,6 +8,7 @@ import { Auth, user, UserCredential, UserInfo } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
+import { ProfileComponent } from '../profile/profile.component';
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -18,6 +19,7 @@ import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
     CdkMenuTrigger,
     CdkMenu,
     CdkMenuItem,
+    ProfileComponent,
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.sass',

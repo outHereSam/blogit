@@ -4,6 +4,9 @@
 @use './styles/mixins' as *
 @use './styles/variables' as *
 
+@import "../node_modules/quill/dist/quill.core.css"
+@import "../node_modules/quill/dist/quill.snow.css"
+
 body, button, input
     font-family: $font-stack
 
@@ -14,3 +17,13 @@ body
 .container
     max-width: 736px
     margin: 0 auto
+
+.p-editor-container
+    margin: 0 0 20px 0
+
+.p-editor-content
+    font-family: $font-stack
+    border-bottom-left-radius: 6px
+    border-bottom-right-radius: 6px
+    background-color: $white-light
+    border: solid 1px $line-color

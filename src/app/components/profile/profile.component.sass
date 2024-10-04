@@ -1,0 +1,22 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+.profile
+    @include flex('row', 10px)
+
+    .avatar
+        width: 40px
+        height: 40px
+        border-radius: 50%
+        background-color: $blue-accent
+        overflow: hidden
+
+    img
+        height: 100%
+        width: 100%
+        object-fit: cover
+
+    .username
+        font-size: fontSize('s')
+        font-weight: 500

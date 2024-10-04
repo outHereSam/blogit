@@ -1,12 +1,6 @@
 <div class="card">
   <div class="info">
-    <div class="profile">
-      <div class="avatar">
-        <img [src]="author['avatarUrl']" alt="Avatar" />
-      </div>
-      <p class="username">&#64;{{ author["username"] }}</p>
-    </div>
-
+    <app-profile [authorId]="post['authorId']" />
     <p class="date">{{ post["dateCreated"].toDate() | date : "MMM d y" }}</p>
   </div>
 

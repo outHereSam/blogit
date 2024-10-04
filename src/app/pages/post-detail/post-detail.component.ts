@@ -14,6 +14,8 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { ConfirmationModalComponent } from '../../components/confirmation-modal/confirmation-modal.component';
 
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-post-detail',
   standalone: true,
@@ -38,12 +40,14 @@ export class PostDetailComponent {
   author!: DocumentData;
   dialog = inject(MatDialog);
   canUpdatePost = false;
+  sanitizedContent!: SafeHtml;
 
   constructor(
     private blogPostService: BlogPostService,
     private route: ActivatedRoute,
     private auth: Auth,
-    private userService: UserService
+    private userService: UserService,
+    private sanitizer: DomSanitizer
   ) {
     this.user$ = user(this.auth);
   }
@@ -58,6 +62,9 @@ export class PostDetailComponent {
 
     this.post$.subscribe({
       next: (post) => {
+        this.sanitizedContent = this.sanitizer.bypassSecurityTrustHtml(
+          post?.['content']
+        );
         this.userService.getUser(post?.['authorId']).then((user) => {
           this.author = user;
           if (this.author['uid'] === this.auth.currentUser?.uid) {
