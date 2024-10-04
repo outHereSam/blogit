@@ -13,18 +13,23 @@ import { Notyf } from 'notyf';
 import { Router } from '@angular/router';
 import { EditorModule } from 'primeng/editor';
 import { DocumentData } from '@angular/fire/firestore';
+import { LoaderComponent } from '../loader/loader.component';
 @Component({
   selector: 'app-blog-form',
   standalone: true,
-  imports: [ReactiveFormsModule, EditorModule],
+  imports: [ReactiveFormsModule, EditorModule, LoaderComponent],
   templateUrl: './blog-form.component.html',
   styleUrl: './blog-form.component.sass',
 })
 export class BlogFormComponent {
   @Input() post!: DocumentData;
   @Input() postId!: string;
+
   user$!: Observable<User | null>;
   userId: string | undefined;
+
+  isLoading: boolean = false;
+
   postForm = new FormGroup({
     title: new FormControl(this.post ? this.post['title'] : '', [
       Validators.required,
@@ -60,6 +65,7 @@ export class BlogFormComponent {
 
   onSubmit() {
     if (this.postForm.valid) {
+      this.isLoading = true;
       if (this.post) {
         this.blogPostService
           .editPost(this.postId, {
@@ -67,10 +73,12 @@ export class BlogFormComponent {
             content: this.postForm.value.content,
           })
           .then(() => {
+            this.isLoading = false;
             this.notyf.success('Post updated successfully');
             this.router.navigate(['/']);
           })
           .catch((err) => {
+            this.isLoading = false;
             this.notyf.error('Failed to update post');
             console.error('Failed to update post', err.message);
           });
@@ -85,11 +93,13 @@ export class BlogFormComponent {
             authorId: this.userId,
           })
           .then(() => {
+            this.isLoading = false;
             this.notyf.success('Post created successfully');
             this.postForm.reset();
             this.router.navigate(['/']);
           })
           .catch((err) => {
+            this.isLoading = false;
             this.notyf.error('Failed to create post');
             console.error("Couldn't create post", err.message);
           });

@@ -18,7 +18,12 @@
       type="submit"
       [disabled]="postForm.invalid"
     >
+      @if (isLoading) {
+      <app-loader />
+      } @else {
+
       {{ post ? "Update Post" : "Create Post" }}
+      }
     </button>
   </form>
 </div>
