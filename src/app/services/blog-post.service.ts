@@ -10,6 +10,7 @@ import {
   getDoc,
   orderBy,
   query,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { from, map, Observable } from 'rxjs';
 import { Post } from '../models/app.model';
@@ -36,6 +37,11 @@ export class BlogPostService {
   createPost(post: DocumentData) {
     const postsCollection = collection(this.firestore, 'posts');
     return addDoc(postsCollection, post);
+  }
+
+  editPost(postId: string, post: DocumentData) {
+    const postDoc = doc(this.firestore, 'posts', postId);
+    return updateDoc(postDoc, post);
   }
 
   deletePost(postId: string) {

@@ -1,5 +1,5 @@
 <app-navbar />
 
 @if (post$ | async; as post) {
-<app-blog-form [post]="post" />
+<app-blog-form [post]="post" [postId]="postId" />
 }

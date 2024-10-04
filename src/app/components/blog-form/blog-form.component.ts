@@ -22,6 +22,7 @@ import { DocumentData } from '@angular/fire/firestore';
 })
 export class BlogFormComponent {
   @Input() post!: DocumentData;
+  @Input() postId!: string;
   user$!: Observable<User | null>;
   userId: string | undefined;
   postForm = new FormGroup({
@@ -59,24 +60,40 @@ export class BlogFormComponent {
 
   onSubmit() {
     if (this.postForm.valid) {
-      this.blogPostService
-        .createPost({
-          title: this.postForm.value.title,
-          content: this.postForm.value.content,
-          dateCreated: new Date(),
-          likes: 0,
-          dislikes: 0,
-          authorId: this.userId,
-        })
-        .then(() => {
-          this.notyf.success('Post created successfully');
-          this.postForm.reset();
-          this.router.navigate(['/']);
-        })
-        .catch((err) => {
-          this.notyf.error('Failed to create post');
-          console.error('Login failed', err.message);
-        });
+      if (this.post) {
+        this.blogPostService
+          .editPost(this.postId, {
+            title: this.postForm.value.title,
+            content: this.postForm.value.content,
+          })
+          .then(() => {
+            this.notyf.success('Post updated successfully');
+            this.router.navigate(['/']);
+          })
+          .catch((err) => {
+            this.notyf.error('Failed to update post');
+            console.error('Failed to update post', err.message);
+          });
+      } else {
+        this.blogPostService
+          .createPost({
+            title: this.postForm.value.title,
+            content: this.postForm.value.content,
+            dateCreated: new Date(),
+            likes: 0,
+            dislikes: 0,
+            authorId: this.userId,
+          })
+          .then(() => {
+            this.notyf.success('Post created successfully');
+            this.postForm.reset();
+            this.router.navigate(['/']);
+          })
+          .catch((err) => {
+            this.notyf.error('Failed to create post');
+            console.error("Couldn't create post", err.message);
+          });
+      }
     }
   }
 }

@@ -16,7 +16,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class EditComponent {
   post$!: Observable<DocumentData | undefined>;
-  postId!: string | null;
+  postId!: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,7 +26,7 @@ export class EditComponent {
   ngOnInit() {
     this.post$ = this.route.paramMap.pipe(
       switchMap((params) => {
-        this.postId = params.get('postId');
+        this.postId = params.get('postId') as string;
         return this.blogPostService.getPostById(this.postId ?? '');
       })
     );
