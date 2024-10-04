@@ -79,6 +79,11 @@
       <p class="username">&#64;{{ user["username"] }}</p>
     </div>
   </div>
+
+  <div class="options">
+    <button (click)="onLogout()">Logout</button>
+  </div>
+
   } @else {
   <button routerLink="/login">Login</button>
   }

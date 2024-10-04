@@ -6,11 +6,19 @@ import { DocumentData } from '@angular/fire/firestore';
 import { JsonPipe } from '@angular/common';
 import { Auth, user, UserCredential, UserInfo } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-
+import { AuthService } from '../../services/auth.service';
+import { CdkMenu, CdkMenuItem, CdkMenuTrigger } from '@angular/cdk/menu';
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, JsonPipe],
+  imports: [
+    RouterLink,
+    RouterLinkActive,
+    JsonPipe,
+    CdkMenuTrigger,
+    CdkMenu,
+    CdkMenuItem,
+  ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.sass',
 })
@@ -21,6 +29,7 @@ export class NavbarComponent {
 
   constructor(
     private userService: UserService,
+    private authService: AuthService,
     private auth: Auth,
     private router: Router
   ) {
@@ -41,5 +50,10 @@ export class NavbarComponent {
       },
       error: (err) => console.error(err),
     });
+  }
+
+  onLogout() {
+    this.authService.logout();
+    this.router.navigate(['']);
   }
 }

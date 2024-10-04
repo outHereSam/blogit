@@ -38,6 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideAnimationsAsync(),
     provideAnimationsAsync(),
-    { provide: NOTYF, useFactory: notyfFactory },
+    { provide: NOTYF, useFactory: notyfFactory }, provideAnimationsAsync(),
   ],
 };
