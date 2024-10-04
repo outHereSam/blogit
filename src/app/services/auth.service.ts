@@ -61,7 +61,7 @@ export class AuthService {
     const auth = getAuth();
     signOut(auth)
       .then(() => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
       })
       .catch((error) => {
         console.error('Failed to sign out:', error);

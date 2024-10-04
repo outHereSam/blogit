@@ -21,7 +21,7 @@ export const routes: Routes = [
     path: 'create',
     loadComponent: () =>
       import('./pages/create/create.component').then((m) => m.CreateComponent),
-    // canActivate: [authGuard],
+    canActivate: [authGuard],
   },
   {
     path: 'post-detail/:postId',
