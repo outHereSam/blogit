@@ -1,4 +1,10 @@
 <app-navbar />
+@if (canUpdatePost) {
+<div class="options">
+  <button class="edit">Edit Post</button>
+  <button class="delete" mat-button (click)="openDialog()">Delete Post</button>
+</div>
+}
 <main>
   @if (post$ | async; as post) {
   <h1 class="title">{{ post["title"] }}</h1>

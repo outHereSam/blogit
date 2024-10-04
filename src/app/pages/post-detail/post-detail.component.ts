@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DocumentData } from '@angular/fire/firestore';
 import { Observable, switchMap } from 'rxjs';
 import { BlogPostService } from '../../services/blog-post.service';
@@ -10,6 +10,10 @@ import { CommentFormComponent } from '../../components/comment-form/comment-form
 import { CommentListComponent } from '../../components/comment-list/comment-list.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 
+import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { ConfirmationModalComponent } from '../../components/confirmation-modal/confirmation-modal.component';
+
 @Component({
   selector: 'app-post-detail',
   standalone: true,
@@ -17,8 +21,11 @@ import { NavbarComponent } from '../../components/navbar/navbar.component';
     AsyncPipe,
     DatePipe,
     CommentFormComponent,
+
     CommentListComponent,
+    ConfirmationModalComponent,
     NavbarComponent,
+    MatButtonModule,
   ],
   templateUrl: './post-detail.component.html',
   styleUrl: './post-detail.component.sass',
@@ -29,6 +36,8 @@ export class PostDetailComponent {
   user$: Observable<User | null>;
   user!: DocumentData;
   author!: DocumentData;
+  dialog = inject(MatDialog);
+  canUpdatePost = false;
 
   constructor(
     private blogPostService: BlogPostService,
@@ -49,11 +58,20 @@ export class PostDetailComponent {
 
     this.post$.subscribe({
       next: (post) => {
-        this.userService
-          .getUser(post?.['authorId'])
-          .then((user) => (this.author = user));
+        this.userService.getUser(post?.['authorId']).then((user) => {
+          this.author = user;
+          if (this.author['uid'] === this.auth.currentUser?.uid) {
+            this.canUpdatePost = true;
+          }
+        });
       },
       error: (err) => console.error(err),
+    });
+  }
+
+  openDialog() {
+    this.dialog.open(ConfirmationModalComponent, {
+      data: this.postId,
     });
   }
 }

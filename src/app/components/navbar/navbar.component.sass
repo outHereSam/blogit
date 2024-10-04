@@ -30,7 +30,6 @@ header
             background-color: $grey-highlight
 
     .profile
-        position: relative
         cursor: pointer
         @include flex('row', 10px)
 
@@ -46,24 +45,7 @@ header
                 width: 100%
                 object-fit: contain
 
-        .options
-            padding: 20px
-            background-color: $white
-            border-radius: 6px
-            box-shadow: 0 2px 24px rgba(0,0,0,0.05)
-            // width: 120px
-            position: absolute
-            top: 80px
-            right: 40px
-
-
-            button
-                width: 100%
-                background: none
-                appearance: none
-                border: none
-                color: $red-accent
-                cursor: pointer
+    
 
         .name
             text-align: left
@@ -76,3 +58,17 @@ header
 
 
 
+.cdk-menu
+    margin-top: 20px
+    padding: 20px
+    background-color: $white
+    border-radius: 6px
+    box-shadow: 0 2px 24px rgba(0,0,0,0.05)
+
+    button
+        width: 100%
+        background: none
+        appearance: none
+        border: none
+        color: $red-accent
+        cursor: pointer

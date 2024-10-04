@@ -10,6 +10,7 @@ import { Auth, user, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { NOTYF } from '../../../utils/notyf.token';
 import { Notyf } from 'notyf';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog-form',
@@ -29,6 +30,7 @@ export class BlogFormComponent {
   constructor(
     private blogPostService: BlogPostService,
     private auth: Auth,
+    private router: Router,
     @Inject(NOTYF) private notyf: Notyf
   ) {
     this.user$ = user(this.auth);
@@ -56,6 +58,7 @@ export class BlogFormComponent {
         .then(() => {
           this.notyf.success('Post created successfully');
           this.postForm.reset();
+          this.router.navigate(['/']);
         })
         .catch((err) => {
           this.notyf.error('Failed to create post');

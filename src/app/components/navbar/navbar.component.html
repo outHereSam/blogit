@@ -71,7 +71,7 @@
   </nav>
 
   @if (user) {
-  <div class="profile">
+  <div [cdkMenuTriggerFor]="menu" class="profile">
     <div class="avatar">
       <img [src]="author['avatarUrl']" alt="Avatar" />
     </div>
@@ -80,11 +80,13 @@
     </div>
   </div>
 
-  <div class="options">
-    <button (click)="onLogout()">Logout</button>
-  </div>
+  <ng-template #menu>
+    <div class="options" cdkMenu>
+      <button (click)="onLogout()">Logout</button>
+    </div>
+  </ng-template>
 
   } @else {
-  <button routerLink="/login">Login</button>
+  <!-- <button routerLink="/login">Login</button> -->
   }
 </header>

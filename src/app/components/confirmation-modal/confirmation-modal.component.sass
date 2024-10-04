@@ -1,0 +1,38 @@
+@use '../../../styles/functions' as *
+@use '../../../styles/mixins' as *
+@use '../../../styles/variables' as *
+
+.confirm
+    padding: 20px
+
+    h3
+        margin: 0 0 20px 0
+
+    p
+        margin: 0 0 20px 0
+
+    .buttons
+        display: flex
+        // justify-content: flex-end
+        gap: 10px
+
+    button
+        border: none
+        padding: 10px 15px
+        border-radius: 99px
+        cursor: pointer
+
+    .edit
+        background-color: $blue-accent
+        color: $white
+
+        &:hover
+            background-color: lighten($blue-accent, 10%)
+
+    .delete
+        background-color: $red-accent
+        color: $white
+
+        &:hover
+            background-color: lighten($red-accent, 10%)
+

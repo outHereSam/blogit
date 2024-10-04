@@ -2,8 +2,34 @@
 @use '../../../styles/mixins' as *
 @use '../../../styles/variables' as *
 
-main
+.options
     margin: 70px 0 0 0
+    display: flex
+    // justify-content: flex-end
+    gap: 10px
+
+    button
+        border: none
+        padding: 10px 15px
+        border-radius: 99px
+        cursor: pointer
+
+    .edit
+        background-color: $blue-accent
+        color: $white
+
+        &:hover
+            background-color: lighten($blue-accent, 10%)
+
+    .delete
+        background-color: $red-accent
+        color: $white
+
+        &:hover
+            background-color: lighten($red-accent, 10%)
+
+main
+    margin: 40px 0
 
     .title
         font-size: fontSize('m')
