@@ -3,9 +3,12 @@ import {
   Auth,
   createUserWithEmailAndPassword,
   getAuth,
+  GoogleAuthProvider,
   signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   user,
+  UserCredential,
 } from '@angular/fire/auth';
 import {
   addDoc,
@@ -51,6 +54,21 @@ export class AuthService {
         });
       }
     );
+  }
+
+  googleSignIn(): Promise<UserCredential> {
+    const provider = new GoogleAuthProvider();
+    return signInWithPopup(this.auth, provider).then((result) => {
+      const user = result.user;
+      const usersCollection = collection(this.firestore, 'users');
+
+      return addDoc(usersCollection, {
+        uid: user.uid,
+        username: user.displayName,
+        email: user.email,
+        avatarUrl: user.photoURL,
+      }).then(() => result);
+    });
   }
 
   login(email: string, password: string) {

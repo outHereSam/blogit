@@ -11,6 +11,8 @@ import { Router, RouterLink } from '@angular/router';
 import { NOTYF } from '../../../utils/notyf.token';
 import { Notyf } from 'notyf';
 import { LoaderComponent } from '../../components/loader/loader.component';
+import { Auth } from '@angular/fire/auth';
+import { log } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +36,16 @@ export class LoginComponent {
     private router: Router,
     @Inject(NOTYF) private notyf: Notyf
   ) {}
+
+  onGoogleLogin() {
+    this.authService
+      .googleSignIn()
+      .then(() => {
+        this.notyf.success('Login Successful');
+        this.router.navigate(['/']);
+      })
+      .catch((error) => this.notyf.error('Failed to login'));
+  }
 
   onSubmit() {
     if (this.loginForm.valid) {

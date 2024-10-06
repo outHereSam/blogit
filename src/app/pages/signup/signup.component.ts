@@ -53,6 +53,16 @@ export class SignupComponent {
     return password === confirmPassword ? null : { notMatch: true };
   }
 
+  onGoogleLogin() {
+    this.authService
+      .googleSignIn()
+      .then(() => {
+        this.notyf.success('Login Successful');
+        this.router.navigate(['/']);
+      })
+      .catch((error) => this.notyf.error('Failed to login'));
+  }
+
   onSubmit() {
     if (this.signupForm.valid) {
       this.isLoading = true;

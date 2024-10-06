@@ -47,7 +47,7 @@ main
             &:focus
                 outline: solid 1px $blue-accent
 
-        button
+        button.signup
             background-color: $blue-accent
             color: $white
             border: none
@@ -56,6 +56,20 @@ main
 
             &:hover
                 background-color: lighten($blue-accent, 10%)
+
+        .google
+            display: flex
+            align-items: center
+            justify-content: center
+            gap: 10px
+            margin: 16px 0 0 0
+            border: solid 1px $line-color
+            // background-color: $line-color
+            background: none
+            cursor: pointer
+            
+            &:hover
+                background-color: $white-bg
 
         p
             text-align: center
