@@ -1,8 +1,14 @@
-@if (author) {
 <div class="profile">
   <div class="avatar">
-    <img [src]="author['avatarUrl']" alt="Avatar" />
+    @if (user$ | async; as user) {
+    <img [src]="user['avatarUrl']" alt="Avatar" />
+    } @else if (userLoading) {
+    <p-skeleton shape="circle" size="40px" styleClass="skeleton" />
+    }
   </div>
-  <p class="username">&#64;{{ author["username"] }}</p>
+  @if (user$ | async; as user) {
+  <p class="username">&#64;{{ user["username"] }}</p>
+  } @else if (userLoading) {
+  <p-skeleton width="5rem" styleClass="skeleton" />
+  }
 </div>
-}

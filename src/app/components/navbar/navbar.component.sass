@@ -38,12 +38,12 @@ header
             height: 40px
             border-radius: 50%
             background-color: $grey-highlight
-            overflow: hidden
+            // overflow: hidden
 
             img
                 height: 100%
                 width: 100%
-                object-fit: contain
+                object-fit: cover
 
     
 
@@ -55,6 +55,14 @@ header
         .username
             font-size: fontSize('s')
             color: $text-secondary
+
+    .login
+        border: none
+        background-color: $blue-accent
+        color: $white
+        padding: 8px 12px
+        border-radius: 999px
+        cursor: pointer
 
 app-profile
     cursor: pointer

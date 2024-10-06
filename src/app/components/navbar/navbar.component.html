@@ -72,7 +72,7 @@
     </button>
   </nav>
 
-  @if (user) {
+  @if (user$ | async; as user) {
   <!-- <div [cdkMenuTriggerFor]="menu" class="profile">
     <div class="avatar">
       <img [src]="author['avatarUrl']" alt="Avatar" />
@@ -90,6 +90,6 @@
   </ng-template>
 
   } @else {
-  <!-- <button routerLink="/login">Login</button> -->
+  <button class="login" routerLink="/login">Login</button>
   }
 </header>
